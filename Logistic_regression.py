@@ -1,7 +1,4 @@
 import pandas as pd
-import numpy as np
-import random as rd
-import matplotlib.pyplot as plt
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
@@ -19,13 +16,15 @@ class DataCleaning:
         return df, target
 
     def LogisticRegression(self, df, target):
-        test_input = train_test_split(df, target, random_state=42)
+        train_input, test_input, train_target, test_target = train_test_split(
+            df, target, random_state=42)
         lr = LogisticRegression()
-        lr.fit(df, target)
+        lr.fit(train_input, train_target)
         result2 = lr.predict(test_input)
-        #print(result2)
+        print(result2)
         print(lr.coef_)
 
-a = DataCleaning()
-result = a.readFile()
-a.LogisticRegression(result[0], result[1])
+if __name__ == "__main__":
+    a = DataCleaning()
+    result = a.readFile()
+    a.LogisticRegression(result[0], result[1])
