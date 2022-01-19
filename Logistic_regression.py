@@ -8,7 +8,7 @@ class DataCleaning:
 
     def readFile(self):
         df = pd.read_csv("train.csv")
-        df.drop(labels=['Cabin', 'Age', 'Name', 'Ticket'], axis=1, inplace=True) #inplace-To replace the file
+        df.drop(labels=['Cabin', 'Age', 'Name', 'Ticket', 'PassengerId'], axis=1, inplace=True) #inplace-To replace the file
         df.dropna(axis=0, inplace=True)
         df['Sex'] = df['Sex'].map({'male':0, 'female':1})
         target = df['Survived']
@@ -22,9 +22,11 @@ class DataCleaning:
         lr.fit(train_input, train_target)
         result2 = lr.predict(test_input)
         print(result2)
+        print(df.head(0))
         print(lr.coef_)
 
 if __name__ == "__main__":
     a = DataCleaning()
     result = a.readFile()
     a.LogisticRegression(result[0], result[1])
+    #test.csv download 후 다시 해보기.
